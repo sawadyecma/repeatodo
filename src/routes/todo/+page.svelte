@@ -2,6 +2,10 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+
+	const onIncrement = () => {
+		confirm('TODO increment');
+	};
 </script>
 
 <svelte:head>
@@ -9,13 +13,12 @@
 </svelte:head>
 
 <div>
-	TODO Page
-	<div class="row">
+	<div class="grid grid-cols-3 gap-2">
 		{#each data.todos as { name, count }}
-			<div class="card">
-				<h3>{name}</h3>
-				<div>count: {count}</div>
-				<button>+</button>
+			<div class="bg-amber-100 mt-2">
+				<p class="font-bold">{name}</p>
+				回数: {count}
+				<button class="btn btn-blue" on:click={onIncrement}>+1</button>
 				<button>edit</button>
 			</div>
 		{/each}
@@ -23,9 +26,13 @@
 </div>
 
 <style>
-	.card {
-		min-width: 400px;
-		min-height: 100px;
-		background-color: aliceblue;
+	.btn {
+		@apply py-1 px-2 rounded;
+	}
+	.btn-blue {
+		@apply bg-blue-500 text-white;
+	}
+	.btn-blue:hover {
+		@apply bg-blue-700;
 	}
 </style>
