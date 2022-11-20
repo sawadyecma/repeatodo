@@ -1,9 +1,7 @@
-<script>
-	let todos = [...new Array(10)].map((_, index) => {
-		const rangeStart = 1 + index * 100;
-		const rangeEnd = rangeStart + 100 - 1;
-		return { id: index, name: `XXX単語帳の${rangeStart}~${rangeEnd}`, count: index + 3 };
-	});
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -13,7 +11,7 @@
 <div>
 	TODO Page
 	<div class="row">
-		{#each todos as { name, count }}
+		{#each data.todos as { name, count }}
 			<div class="card">
 				<h3>{name}</h3>
 				<div>count: {count}</div>
