@@ -1,6 +1,24 @@
 import type { PageServerLoad } from './$types';
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
-export const load: PageServerLoad = () => {
+const loadTodoFromDB = async () => {
+	const uri = import.meta.env.VITE_DATABASE_URL;
+	console.log(uri);
+	const client = new MongoClient(uri, {
+		serverApi: ServerApiVersion.v1
+	});
+
+	await client.connect();
+
+	console.log('Connected correctly to db server');
+	const todosDB = client.db('todos');
+	const todos = await todosDB.collection('todos').find({}).toArray();
+	console.log({ todos });
+};
+
+export const load: PageServerLoad = async () => {
+	await loadTodoFromDB();
+
 	return {
 		todos: [...new Array(10)].map((_, index) => {
 			const rangeStart = 1 + index * 100;
