@@ -3,7 +3,6 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const loadTodoFromDB = async () => {
 	const uri = import.meta.env.VITE_DATABASE_URL;
-	console.log(uri);
 	const client = new MongoClient(uri, {
 		serverApi: ServerApiVersion.v1
 	});
